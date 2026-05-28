@@ -34,17 +34,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
           lfs: true
       - name: Deploy to Hugging Face Spaces
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git config user.email "yohan.parent@gmail.com"
-          git config user.name "yparent"
-          git lfs install
-          git lfs track "*.joblib"
-          git add .gitattributes
-          git commit -m "track joblib with lfs" --allow-empty
-          git remote add hf https://yparent:$HF_TOKEN@huggingface.co/spaces/yparent/prediction-attrition
-          git push hf main --force
+          pip install huggingface_hub
+          huggingface-cli upload yparent/prediction-attrition . . --repo-type space

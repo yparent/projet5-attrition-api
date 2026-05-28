@@ -1,16 +1,10 @@
 name: CI/CD Pipeline
 
-
 on:
   push:
     branches: [main, develop]
   pull_request:
     branches: [main]
-
-
-env:
-  HF_SPACE: votre-user/prediction-attrition
-
 
 jobs:
   test:
@@ -31,16 +25,17 @@ jobs:
       - name: Run tests with coverage
         run: pytest tests/ -v --cov=app --cov-report=term-missing
 
-
   deploy:
     needs: test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Deploy to Hugging Face Spaces
         env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_TOKEN: `${{ secrets.HF_TOKEN }}
         run: |
-          git remote add hf https://huggingface.co/spaces/${{ env.HF_SPACE }}
+          git remote add hf https://yparent:`$HF_TOKEN@huggingface.co/spaces/yparent/prediction-attrition
           git push hf main --force

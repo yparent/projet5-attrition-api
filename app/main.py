@@ -2,7 +2,7 @@
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime
-
+import json
 
 from app.models import EmployeeInput, PredictionOutput, HealthResponse
 from app.predict import predict_attrition
@@ -63,7 +63,7 @@ def predict(
     
     # Logger la prediction en base de donnees
     log = PredictionLog(
-        input_data=employee.model_dump(),
+        input_data=json.dumps(employee.model_dump()),
         prediction=result['prediction'],
         probability_leave=result['probability_leave'],
         risk_level=result['risk_level'],

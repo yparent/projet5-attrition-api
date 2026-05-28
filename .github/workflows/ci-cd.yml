@@ -38,6 +38,8 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
+          git config user.email "yohan.parent@gmail.com"
+          git config user.name "yparent"
           git lfs install
           git lfs track "*.joblib"
           git add .gitattributes

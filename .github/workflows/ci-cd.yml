@@ -9,7 +9,7 @@ on:
 
 
 env:
-  HF_SPACE: votre-user/prediction-attrition
+  HF_SPACE: yparent/prediction-attrition
 
 
 jobs:

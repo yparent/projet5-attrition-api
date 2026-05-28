@@ -35,7 +35,7 @@ jobs:
           fetch-depth: 0
       - name: Deploy to Hugging Face Spaces
         env:
-          HF_TOKEN: `${{ secrets.HF_TOKEN }}
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git remote add hf https://yparent:`$HF_TOKEN@huggingface.co/spaces/yparent/prediction-attrition
+          git remote add hf https://yparent:$HF_TOKEN@huggingface.co/spaces/yparent/prediction-attrition
           git push hf main --force
